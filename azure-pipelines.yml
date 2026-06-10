@@ -9,12 +9,18 @@ steps:
   displayName: task 1 terraform install
   inputs:
     terraformVersion: 'latest'
+- script: |
+    echo CURRENT DIR
+    cd
+    dir
+    type provider.tf
+  displayName: Debug Terraform Files
 - task: TerraformTask@5
   displayName: task 2 terraform init
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/10june'
     backendServiceArm: 'prabhatservicefederation'
     backendAzureRmOverrideSubscriptionID: '582e7b86-d28f-4458-b727-2305c8849192'
     backendAzureRmResourceGroupName: 'prabhatrg'
@@ -26,20 +32,20 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/10june'
 - task: TerraformTask@5
   displayName: task 4 terraform plan
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    wworkingDirectory: '$(System.DefaultWorkingDirectory)/10june'
     environmentServiceNameAzureRM: 'prabhatservicefederation'
 - task: TerraformTask@5
   displayName: task 4 terraform apply
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/10june'
     commandOptions: '-auto-approve'
     environmentServiceNameAzureRM: 'prabhatservicefederation'
 - task: TerraformTask@5
@@ -47,7 +53,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/10june'
     outputTo: 'console'
     outputFormat: 'default'
     environmentServiceNameAzureRM: 'prabhatservicefederation'
